@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Addition/Subtraction</title>
+	<link rel="manifest" href="manifest_math.json">
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Page-Enter" content="RevealTrans(Duration=0.5, transition=23)" />
+	<meta name="Author" content="Ashutosh Raghuwanshi" />
+	<meta name="Keywords" content="javascript encrypter, javascript, encrypt, cryptography, cypher, encode" />
+	<meta name="Description"
+		content="This is a JavaSctipt tool for encrypting your script or document. JavaScript scrambling is also available." />
+	<meta name="theme-color" content="#aaaaaa">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>
+		if ('serviceWorker' in navigator) {
+			console.log("Will the service worker register?");
+			navigator.serviceWorker.register('sw_math.js')
+				.then(function (reg) {
+					console.log("Yes, it did.");
+				}).catch(function (err) {
+					console.log("No it didn't. This happened: ", err)
+				});
+		}
+	</script>
+	<style type="text/css">
+		input.Question,
+		input.Answer {
+			font-size: 2em;
+			font-weight: bold;
+			background-color: white;
+			color: black;
+		}
+
+		input.Question {
+			border: 0;
+			text-align: right;
+		}
+
+		input.Answer {
+			width: 4em;
+			margin: 3pt;
+		}
+
+		input.Check {
+			font-size: 1em;
+			font-weight: bold;
+			padding: 0.6em 1em 0.5em 1em;
+		}
+
+		div {
+			margin: 1em 0 1em 0;
+			vertical-align: top;
+			align-content: center;
+		}
+
+		span.Equal {
+			font-size: 2em;
+			font-weight: bold;
+			padding: 0 1em 0 1em;
+		}
+	</style>
+	<script type="text/javascript">
+		function Generate() {
+			var d = document.getElementById('digit2').value;
+			var int = document.getElementById('integer').checked;
+			var digits = Math.pow(10, d);
+			for (i = 1; i <= 5; i++) {
+				var a = Math.ceil(Math.random() * digits * (int ? 2 : 1) - (int ? digits : 0));
+				var b = Math.ceil(Math.random() * digits * (int ? 2 : 1) - (int ? digits : 0));
+
+				var op;
+				switch (Math.ceil(Math.random() * 10 / 4)) {
+					case 1:
+						op = " - ";
+						if (!int && a < b) {
+							var tmp = a;
+							a = b;
+							b = tmp;
+						}
+						break;
+					case 2:
+						op = " × "; break;
+					case 3:
+						op = " ÷ ";
+						if(b == 0) b = 1; // Avoid divide by zero.
+						a = a * b; // Making sure it is always a multiple of deviser.
+						break;
+					default:
+						op = " + ";
+				}
+
+				document.getElementById('eq' + i).value = a + op + ((b < 0) ? "(" + b + ")" : b);
+
+				document.getElementById('ans' + i).style.backgroundColor = "white";
+				document.getElementById('ans' + i).value = "";//eval(a + op + b);
+			}
+		}
+
+		function Check(id) {
+			var question = document.getElementById('eq' + id).value;
+			question = question.replace("×", "*").replace("÷", "/")
+			var answer = document.getElementById('ans' + id).value;
+			if (eval(question) == answer)
+				document.getElementById('ans' + id).style.backgroundColor = "#99ff00";
+			else
+				document.getElementById('ans' + id).style.backgroundColor = "#ff0000";
+		}
+	</script>
+</head>
+
+<body onload="Generate();">
+	<input type="button" id="generate" value="New Questions" onclick="Generate();">&nbsp;<label><input type="number"
+			value="2" id="digit2">&nbsp;digits</label>&nbsp;<label><input type="checkbox"
+			id="integer" checked>&nbsp;Integer</label><br />
+	<div>
+		<input type="text" id="eq1" class="Question" disabled value="" /><span class="Equal">=</span><input
+			type="number" id="ans1" class="Answer" /><input type="button" class="Check" value="Check"
+			onclick="Check(1);"><br />
+	</div>
+	<div>
+		<input type="text" id="eq2" class="Question" disabled value="" /><span class="Equal">=</span><input
+			type="number" id="ans2" class="Answer" /><input type="button" class="Check" value="Check"
+			onclick="Check(2);"><br />
+	</div>
+	<div>
+		<input type="text" id="eq3" class="Question" disabled value="" /><span class="Equal">=</span><input
+			type="number" id="ans3" class="Answer" /><input type="button" class="Check" value="Check"
+			onclick="Check(3);"><br />
+	</div>
+	<div>
+		<input type="text" id="eq4" class="Question" disabled value="" /><span class="Equal">=</span><input
+			type="number" id="ans4" class="Answer" /><input type="button" class="Check" value="Check"
+			onclick="Check(4);"><br />
+	</div>
+	<div>
+		<input type="text" id="eq5" class="Question" disabled value="" /><span class="Equal">=</span><input
+			type="number" id="ans5" class="Answer" /><input type="button" class="Check" value="Check"
+			onclick="Check(5);"><br />
+	</div>
+</body>
+
+</html>

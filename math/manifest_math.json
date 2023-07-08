@@ -1,0 +1,15 @@
+{
+  "short_name": "Kids Math",
+  "name": "Math for Kids",
+  "icons": [
+    {
+      "src": "math.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "background_color": "#ffffff",
+  "theme_color": "#aaaaaa",
+  "display": "fullscreen",
+  "start_url": "index.html"
+}
