@@ -1,0 +1,21 @@
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f7f9fa; margin: 0; padding: 40px 20px; color: #333; }
+.container { max-width: 1400px; margin: 0 auto; }
+h1 { text-align: center; color: #1a1a1a; margin-bottom: 50px; font-size: 32px; font-weight: 700; }
+
+/* Clean, wide grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 40px; }
+
+.card { background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); text-decoration: none; color: inherit; border: 1px solid #eaeaea; }
+.card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: #d1d1d1; }
+
+.img-container { width: 100%; height: 380px; background: #fff; display: flex; align-items: center; justify-content: center; padding: 30px; box-sizing: border-box; }
+.img-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* Increased padding and vertical flex allocation for longer strings */
+.info { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: #fafafa; border-top: 1px solid #eaeaea; min-height: 220px; }
+
+/* Expanded to 5 lines maximum to display full e-commerce title configurations */
+.title { font-size: 18px; font-weight: 600; line-height: 1.5; display: -webkit-box; line-clamp: 5; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; margin: 0 0 25px 0; color: #111; word-break: break-word; }
+
+.btn { display: block; text-align: center; background-color: #111; color: #fff; padding: 14px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; transition: background 0.2s; margin-top: auto; }
+.card:hover .btn { background-color: #333; }
