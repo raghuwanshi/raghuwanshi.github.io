@@ -1,0 +1,31 @@
+#!/bin/sh
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+# Skip merges or squashes
+if [ "$COMMIT_SOURCE" = "merge" ] || [ "$COMMIT_SOURCE" = "squash" ]; then
+  exit 0
+fi
+
+# Map root files and hidden top-level folders (.dir) to "root", otherwise extract top-level folder
+PROJECTS=$(git diff --cached --name-only | awk -F'/' '
+  NF == 1 || $1 ~ /^\./ { print "root"; next }
+  { print $1 }
+' | sort -u)
+
+for PROJECT in $PROJECTS; do
+  git interpret-trailers --in-place --if-exists doNothing --trailer "Project: $PROJECT" "$COMMIT_MSG_FILE"
+done
+
+# Insert "---" and a blank line before the first Project trailer (if not already present)
+  awk '
+    /^Project:/ && !done {
+      if (prev2 != "---") {
+        print "---"
+        print ""
+      }
+      done = 1
+    }
+    { prev2 = prev1; prev1 = $0; print }
+  ' "$COMMIT_MSG_FILE" > "${COMMIT_MSG_FILE}.tmp" && mv "${COMMIT_MSG_FILE}.tmp" "$COMMIT_MSG_FILE"
+
