@@ -5,8 +5,4 @@ google_analytics:
 theme: jekyll-theme-hacker
 github:
   repository_url: https://github.com/raghuwanshi
-exclude:
-  ./lipi-editor/
-  ./math/
-  ./product-catalogue/
 
